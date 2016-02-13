@@ -14,7 +14,42 @@ function getImageSize(img, callback) {
 			clearInterval(wait);
 			callback($img, w, h);
 		}
-	}, 30)
+	}, 30);
+}
+
+function createPlaceholder(img, width, height) {
+	$div = $("<div>");
+
+	//Set width
+	if (img.attr("pil-width") == null) {
+		$div.width(width);
+	} else {
+		$div.width(img.attr("pil-width"));
+	}
+
+	//Set height
+	if (img.attr("pil-height") == null){
+		$div.height(height);
+	} else {
+		$div.height(img.attr("pil-height"));
+	}
+
+	//Add Styles
+	if (img.attr("pil-style") == null || img.attr("pil-style").toLowerCase() != "false" ) {
+		$div.css({
+			"background-color" : "gray",
+			"display" : "inline-block"
+		});
+	}
+
+	//Add Classes
+	$div.addClass("pil-placeholder");
+	if(img.attr("pil-class") == null) {
+		$div.addClass(img.attr("class"));
+	} else {
+		$div.addClass(img.attr("pil-class"));
+	}
+	return $div;
 }
 
 $(function() {
@@ -24,13 +59,7 @@ $(function() {
 		if (!$img[0].complete) {
 			$img.hide();
 			getImageSize($img, function($img, width, height) {
-				$div = $("<div>");
-				$div.width(width);
-				$div.height(height);
-				$div.addClass("pil-placeholder");
-				$div.insertAfter($img);
-
-				console.log($img);
+				createPlaceholder($img, width, height).insertAfter($img);
 				$img.load(showImgs($img, $div));
 			});
 		}
