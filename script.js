@@ -1,37 +1,38 @@
+function showImgs(img, div) {
+	return function() {
+		img.show();
+		div.remove();
+	}
+}
+
+function getImageSize(img, callback) {
+	var $img = $(img);
+	var wait = setInterval(function() {
+		var w = $img.width();
+		var h = $img.height();
+		if (w && h) {
+			clearInterval(wait);
+			callback($img, w, h);
+		}
+	}, 30)
+}
+
 $(function() {
 	var $imgs = $(".pil-load");
-	console.log($imgs)
-	for (var i = 0; i < $imgs.length; i++) {
-		$img = $($imgs[i]);
+	$imgs.each(function() {
+		$img = $(this);
 		if (!$img[0].complete) {
 			$img.hide();
-			console.log($img)
-			getImageSize($img, function(width, height) {
+			getImageSize($img, function($img, width, height) {
 				$div = $("<div>");
 				$div.width(width);
 				$div.height(height);
 				$div.addClass("pil-placeholder");
-				$div.addClass(i);
-				$img.parent().append($div);
+				$div.insertAfter($img);
 
-				$img.load(function() {
-					console.log("removed div")
-					$(this).show();
-					$div.hide();
-				});
+				console.log($img);
+				$img.load(showImgs($img, $div));
 			});
-		} 
-	}
-
-	function getImageSize(img, callback) {
-		var $img = $(img);
-		var wait = setInterval(function() {
-			var w = $img.width();
-			var h = $img.height();
-			if (w && h) {
-				clearInterval(wait);
-				callback.apply(this, [w, h]);
-			}
-		}, 30)
-	}
-});	
+		}
+	});
+});

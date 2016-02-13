@@ -4,6 +4,7 @@
 
 .pil-placeholder {
 	background-color: gray;
+	display: inline-block;
 }
 
 body {
