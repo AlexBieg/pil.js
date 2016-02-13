@@ -9,7 +9,7 @@ For the most basic usage of this library simply add `pil-load` as a class to one
 
 Example:
 ```
-<img class="pil-load" src="https://yoursource.com">
+<img class="pil-load" src="https://yoursource.com">
 ```
 
 It also works with multiple images.
