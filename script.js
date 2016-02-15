@@ -37,7 +37,6 @@ function createPlaceholder(img, width, height) {
 	//Add Styles
 	if (img.attr("pil-style") == null || img.attr("pil-style").toLowerCase() != "false" ) {
 		$div.css({
-			"background-color" : "gray",
 			"display" : "inline-block"
 		});
 	}

@@ -1,16 +1,19 @@
 .pil-load {
-	width: 600px;
+	width: 200px;
 }
 
-.test1 {
-	background-color: green;
-	display: inline-block;
+.pil-placeholder {
+  animation: pulse 1s infinite;
 }
 
-.test2 {
-	border-radius: 5px;
-}
-
-body {
-	margin: 0px;
+@keyframes pulse {
+  0% {
+    background-color: #f8f8f8;
+  }
+  50% {
+    background-color: #c4c4c4;
+  }
+  100% {
+	background-color: #f8f8f8;
+  }
 }
