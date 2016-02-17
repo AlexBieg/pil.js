@@ -51,8 +51,9 @@ function createPlaceholder(img, width, height) {
 	return $div;
 }
 
-$(function() {
+function handleImgs() {
 	var $imgs = $(".pil-load");
+	console.log($imgs);
 	$imgs.each(function() {
 		$img = $(this);
 		if (!$img[0].complete) {
@@ -63,4 +64,8 @@ $(function() {
 			});
 		}
 	});
+}
+
+$(function() {
+	handleImgs();
 });
